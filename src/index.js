@@ -1,15 +1,9 @@
 var prompt = require('prompt');
-// Gameplay
-// 1. Print board to screen and prompt for user input
-
-// 0 | 1 | 2
-// 3 | 4 | 5
-// 6 | 7 | 8
 
 var board = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 var turn_number = 0;
 
-function displayBoard() {
+function displayBoard(board) {
   var grid = '';
   for (var i=0; i<board.length; i+=3) {
     grid += board[i] + '|' + board[i+1] + '|' + board[i+2] + '\n'
@@ -42,9 +36,9 @@ function play_turn() {
   prompt.get(['move'], function (err, result) {
 
     if (board[result.move] === 'X' || board[result.move] === 'O') {
-      console.log('NAUGHTY!!!');
+      throw new Error("NAUGHTY!!!")
       console.log(displayBoard());
-      play_turn()
+      // play_turn()
     }
 
     board[result.move] = turn(turn_number);
